@@ -95,19 +95,19 @@ const Index = () => {
                 <div className="p-6 rounded-lg bg-primary/10 border border-primary/20">
                   <div className="text-4xl mb-3">🎄</div>
                   <h4 className="font-bold text-lg mb-2">1º Prémio</h4>
-                  <p className="text-muted-foreground">Voucher de €500</p>
+                  <p className="text-muted-foreground">Voucher de 250.000 Kz</p>
                 </div>
                 
                 <div className="p-6 rounded-lg bg-accent/10 border border-accent/20">
                   <div className="text-4xl mb-3">⭐</div>
                   <h4 className="font-bold text-lg mb-2">2º Prémio</h4>
-                  <p className="text-muted-foreground">Voucher de €300</p>
+                  <p className="text-muted-foreground">Voucher de 150.000 Kz</p>
                 </div>
                 
                 <div className="p-6 rounded-lg bg-secondary/10 border border-secondary/20">
                   <div className="text-4xl mb-3">🎊</div>
                   <h4 className="font-bold text-lg mb-2">3º Prémio</h4>
-                  <p className="text-muted-foreground">Voucher de €150</p>
+                  <p className="text-muted-foreground">Voucher de 75.000 Kz</p>
                 </div>
               </div>
 
@@ -143,10 +143,23 @@ const Index = () => {
           </Card>
 
           {/* Rodapé com destaque */}
-          <div className="mt-12 p-6 rounded-lg bg-muted/50 backdrop-blur-sm animate-in fade-in duration-700 delay-300">
-            <p className="text-sm text-muted-foreground">
-              🎅 Não perca esta oportunidade única de celebrar as festas com prémios especiais! 🎅
-            </p>
+          <div className="mt-12 space-y-4">
+            <div className="p-6 rounded-lg bg-muted/50 backdrop-blur-sm animate-in fade-in duration-700 delay-300">
+              <p className="text-sm text-muted-foreground text-center">
+                🎅 Não perca esta oportunidade única de celebrar as festas com prémios especiais! 🎅
+              </p>
+            </div>
+            
+            <div className="text-center">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => navigate('/cliques')}
+                className="text-xs"
+              >
+                Ver Lista de Participações
+              </Button>
+            </div>
           </div>
         </div>
       </div>
