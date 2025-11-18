@@ -57,6 +57,12 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        festive: {
+          gold: "hsl(var(--festive-gold))",
+          red: "hsl(var(--festive-red))",
+          green: "hsl(var(--festive-green))",
+          snow: "hsl(var(--festive-snow))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
