@@ -150,16 +150,6 @@ const Index = () => {
               </p>
             </div>
             
-            <div className="text-center">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => navigate('/cliques')}
-                className="text-xs"
-              >
-                Ver Lista de Participações
-              </Button>
-            </div>
           </div>
         </div>
       </div>
