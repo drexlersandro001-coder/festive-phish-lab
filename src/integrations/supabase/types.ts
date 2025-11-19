@@ -61,16 +61,17 @@ export type Database = {
       }
     }
     Views: {
-      phishing_stats: {
-        Row: {
-          last_click_at: string | null
-          total_clicks: number | null
-          unique_users: number | null
-        }
-        Relationships: []
-      }
+      [_ in never]: never
     }
     Functions: {
+      get_phishing_stats: {
+        Args: never
+        Returns: {
+          last_click_at: string
+          total_clicks: number
+          unique_users: number
+        }[]
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
