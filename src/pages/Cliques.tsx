@@ -5,47 +5,37 @@ import { MousePointerClick, Clock, Users, Activity } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 
-interface PhishingStats {
-  total_clicks: number;
-  unique_users: number;
-  last_click_at: string | null;
+interface Click {
+  id: string;
+  anonymous_id: string;
+  clicked_at: string;
+  user_agent: string | null;
 }
 
 const Cliques = () => {
   const navigate = useNavigate();
-  const [stats, setStats] = useState<PhishingStats>({
-    total_clicks: 0,
-    unique_users: 0,
-    last_click_at: null,
-  });
+  const [clicks, setClicks] = useState<Click[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    loadStats();
+    loadClicks();
     
     // Atualizar a cada 5 segundos
-    const interval = setInterval(loadStats, 5000);
+    const interval = setInterval(loadClicks, 5000);
     return () => clearInterval(interval);
   }, []);
 
-  const loadStats = async () => {
+  const loadClicks = async () => {
     try {
-      const { data, error } = await supabase.rpc('get_phishing_stats');
+      const { data, error } = await supabase
+        .from('phishing_clicks')
+        .select('*')
+        .order('clicked_at', { ascending: false });
 
-      if (error) {
-        console.error('Erro ao carregar estatísticas:', error);
-        return;
-      }
-      
-      if (data && data.length > 0) {
-        setStats({
-          total_clicks: data[0].total_clicks || 0,
-          unique_users: data[0].unique_users || 0,
-          last_click_at: data[0].last_click_at,
-        });
-      }
+      if (error) throw error;
+      setClicks(data || []);
     } catch (error) {
-      console.error('Erro ao carregar estatísticas:', error);
+      console.error('Erro ao carregar cliques:', error);
     } finally {
       setIsLoading(false);
     }
@@ -75,10 +65,10 @@ const Cliques = () => {
               </div>
               <div>
                 <h1 className="text-2xl font-bold text-foreground">
-                  Estatísticas Públicas
+                  Lista de Cliques
                 </h1>
                 <p className="text-sm text-muted-foreground">
-                  Visualização agregada dos cliques registados
+                  Visualização pública dos cliques registados
                 </p>
               </div>
             </div>
@@ -100,7 +90,7 @@ const Cliques = () => {
               </div>
               <div>
                 <p className="text-sm text-muted-foreground">Total de Cliques</p>
-                <p className="text-3xl font-bold text-foreground">{stats.total_clicks}</p>
+                <p className="text-3xl font-bold text-foreground">{clicks.length}</p>
               </div>
             </div>
           </Card>
@@ -113,7 +103,7 @@ const Cliques = () => {
               <div>
                 <p className="text-sm text-muted-foreground">Utilizadores Únicos</p>
                 <p className="text-3xl font-bold text-foreground">
-                  {stats.unique_users}
+                  {new Set(clicks.map(c => c.anonymous_id)).size}
                 </p>
               </div>
             </div>
@@ -126,30 +116,55 @@ const Cliques = () => {
               </div>
               <div>
                 <p className="text-sm text-muted-foreground">Último Clique</p>
-                <p className="text-lg font-bold text-foreground">
-                  {stats.last_click_at ? formatDate(stats.last_click_at) : 'N/A'}
+                <p className="text-sm font-bold text-foreground">
+                  {clicks.length > 0 ? formatDate(clicks[0].clicked_at) : 'Nenhum'}
                 </p>
               </div>
             </div>
           </Card>
         </div>
 
-        {/* Informação sobre privacidade */}
-        <Card className="p-6 shadow-lg bg-muted/30">
-          <h2 className="text-xl font-bold text-foreground mb-4">
-            Sobre as Estatísticas
-          </h2>
-          <div className="space-y-2 text-sm text-muted-foreground">
-            <p>
-              Esta página exibe apenas estatísticas agregadas para proteger a privacidade dos participantes.
-            </p>
-            <p>
-              Os dados individuais de cliques estão protegidos e só podem ser acedidos por administradores autenticados.
-            </p>
-            <p className="font-medium text-foreground">
-              Este é um projeto educativo sobre sensibilização para phishing.
-            </p>
+        {/* Lista de cliques */}
+        <Card className="p-6 shadow-lg">
+          <div className="flex items-center gap-3 mb-6">
+            <MousePointerClick className="w-6 h-6 text-primary" />
+            <h2 className="text-xl font-bold text-foreground">
+              Histórico de Cliques
+            </h2>
           </div>
+
+          {isLoading ? (
+            <div className="text-center py-12 text-muted-foreground">
+              <Activity className="w-16 h-16 mx-auto mb-4 opacity-50 animate-pulse" />
+              <p>A carregar dados...</p>
+            </div>
+          ) : clicks.length === 0 ? (
+            <div className="text-center py-12 text-muted-foreground">
+              <Users className="w-16 h-16 mx-auto mb-4 opacity-50" />
+              <p>Nenhum clique registado ainda.</p>
+            </div>
+          ) : (
+            <div className="space-y-3 max-h-96 overflow-y-auto">
+              {clicks.map((click) => (
+                <Card key={click.id} className="p-4 bg-muted/50 hover:bg-muted/70 transition-colors">
+                  <div className="grid md:grid-cols-3 gap-4 text-sm">
+                    <div>
+                      <p className="text-xs text-muted-foreground mb-1">ID Anónimo</p>
+                      <p className="font-mono text-xs truncate">{click.anonymous_id}</p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-muted-foreground mb-1">Data/Hora</p>
+                      <p className="font-medium">{formatDate(click.clicked_at)}</p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-muted-foreground mb-1">User Agent</p>
+                      <p className="text-xs truncate">{click.user_agent || 'N/A'}</p>
+                    </div>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          )}
         </Card>
       </div>
     </div>
