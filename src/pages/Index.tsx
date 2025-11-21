@@ -39,117 +39,173 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary/10 via-background to-secondary/10 relative overflow-hidden">
-      {/* Flocos de neve decorativos (SVG patterns) */}
-      <div className="absolute inset-0 opacity-20 pointer-events-none">
-        <div className="absolute top-10 left-10 animate-float">
-          <Star className="w-8 h-8 text-accent" />
+    <div className="min-h-screen bg-gradient-to-b from-background via-muted/30 to-background relative overflow-hidden">
+      {/* Subtle decorative elements */}
+      <div className="absolute inset-0 opacity-5 pointer-events-none">
+        <div className="absolute top-20 right-10 animate-float">
+          <Sparkles className="w-12 h-12 text-primary" />
         </div>
-        <div className="absolute top-20 right-20 animate-float" style={{ animationDelay: '0.5s' }}>
-          <Sparkles className="w-6 h-6 text-accent" />
+        <div className="absolute bottom-40 left-10 animate-float" style={{ animationDelay: '1s' }}>
+          <Star className="w-10 h-10 text-accent" />
         </div>
-        <div className="absolute bottom-20 left-20 animate-float" style={{ animationDelay: '1s' }}>
-          <TreePine className="w-10 h-10 text-secondary" />
-        </div>
-        <div className="absolute bottom-32 right-32 animate-float" style={{ animationDelay: '1.5s' }}>
-          <Star className="w-6 h-6 text-primary" />
+        <div className="absolute top-1/2 right-1/4 animate-float" style={{ animationDelay: '2s' }}>
+          <TreePine className="w-8 h-8 text-secondary" />
         </div>
       </div>
 
-      {/* Conteúdo principal */}
-      <div className="container mx-auto px-4 py-12 relative z-10">
-        <div className="max-w-4xl mx-auto text-center space-y-8">
-          {/* Cabeçalho */}
-          <div className="space-y-4 animate-in fade-in slide-in-from-top duration-700">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <Gift className="w-12 h-12 text-primary animate-sparkle" />
-              <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">
-                Natal & Ano Novo
-              </h1>
-              <Gift className="w-12 h-12 text-secondary animate-sparkle" style={{ animationDelay: '0.5s' }} />
+      {/* Main content */}
+      <div className="container mx-auto px-4 py-16 relative z-10">
+        <div className="max-w-5xl mx-auto space-y-10">
+          {/* Header */}
+          <div className="text-center space-y-6 animate-in fade-in slide-in-from-top duration-700">
+            <div className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full">
+              <Gift className="w-5 h-5 text-primary" />
+              <span className="text-sm font-semibold text-primary uppercase tracking-wide">Promoção Oficial</span>
             </div>
             
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-              Grande Concurso de Fim de Ano! 🎉
-            </h2>
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground leading-tight">
+              Grande Sorteio de<br />
+              <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+                Fim de Ano
+              </span>
+            </h1>
             
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Celebre connosco esta época festiva e ganhe prémios exclusivos!
+            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+              Participe no nosso sorteio exclusivo e concorra a prémios no valor total de <span className="font-bold text-foreground">475.000 Kz</span>
             </p>
           </div>
 
-          {/* Card principal */}
-          <Card className="p-8 md:p-12 shadow-festive backdrop-blur-sm bg-card/95 border-2 border-accent/20 animate-in fade-in slide-in-from-bottom duration-700 delay-200">
-            <div className="space-y-6">
-              <div className="inline-block px-6 py-2 bg-gradient-to-r from-primary to-accent rounded-full shadow-gold">
-                <p className="text-primary-foreground font-bold text-lg">
-                  🎁 SORTEIO ESPECIAL 🎁
-                </p>
-              </div>
-
-              <h3 className="text-2xl md:text-3xl font-bold text-foreground">
-                Ganhe Prémios Incríveis!
-              </h3>
-
-              <div className="grid md:grid-cols-3 gap-6 my-8">
-                <div className="p-6 rounded-lg bg-primary/10 border border-primary/20">
-                  <div className="text-4xl mb-3">🎄</div>
-                  <h4 className="font-bold text-lg mb-2">1º Prémio</h4>
-                  <p className="text-muted-foreground">Voucher de 250.000 Kz</p>
-                </div>
+          {/* Main Card */}
+          <Card className="overflow-hidden shadow-2xl bg-card border-border animate-in fade-in slide-in-from-bottom duration-700 delay-200">
+            <div className="p-8 md:p-12 lg:p-16 space-y-10">
+              
+              {/* Prémios */}
+              <div className="space-y-8">
+                <h2 className="text-2xl md:text-3xl font-bold text-foreground text-center">
+                  Prémios do Sorteio
+                </h2>
                 
-                <div className="p-6 rounded-lg bg-accent/10 border border-accent/20">
-                  <div className="text-4xl mb-3">⭐</div>
-                  <h4 className="font-bold text-lg mb-2">2º Prémio</h4>
-                  <p className="text-muted-foreground">Voucher de 150.000 Kz</p>
-                </div>
-                
-                <div className="p-6 rounded-lg bg-secondary/10 border border-secondary/20">
-                  <div className="text-4xl mb-3">🎊</div>
-                  <h4 className="font-bold text-lg mb-2">3º Prémio</h4>
-                  <p className="text-muted-foreground">Voucher de 75.000 Kz</p>
+                <div className="grid md:grid-cols-3 gap-6">
+                  <div className="relative p-8 rounded-2xl bg-gradient-to-br from-primary/5 to-primary/10 border-2 border-primary/20 hover:border-primary/40 transition-all duration-300 hover:scale-105">
+                    <div className="absolute -top-3 -right-3 w-12 h-12 bg-primary rounded-full flex items-center justify-center text-primary-foreground font-bold shadow-lg">
+                      1º
+                    </div>
+                    <div className="text-5xl mb-4 text-center">🏆</div>
+                    <h3 className="font-bold text-xl mb-2 text-center text-foreground">Grande Prémio</h3>
+                    <p className="text-3xl font-extrabold text-center text-primary">250.000 Kz</p>
+                    <p className="text-sm text-center text-muted-foreground mt-2">em vouchers</p>
+                  </div>
+                  
+                  <div className="relative p-8 rounded-2xl bg-gradient-to-br from-accent/5 to-accent/10 border-2 border-accent/20 hover:border-accent/40 transition-all duration-300 hover:scale-105">
+                    <div className="absolute -top-3 -right-3 w-12 h-12 bg-accent rounded-full flex items-center justify-center text-accent-foreground font-bold shadow-lg">
+                      2º
+                    </div>
+                    <div className="text-5xl mb-4 text-center">⭐</div>
+                    <h3 className="font-bold text-xl mb-2 text-center text-foreground">Segundo Prémio</h3>
+                    <p className="text-3xl font-extrabold text-center text-accent-foreground">150.000 Kz</p>
+                    <p className="text-sm text-center text-muted-foreground mt-2">em vouchers</p>
+                  </div>
+                  
+                  <div className="relative p-8 rounded-2xl bg-gradient-to-br from-secondary/5 to-secondary/10 border-2 border-secondary/20 hover:border-secondary/40 transition-all duration-300 hover:scale-105">
+                    <div className="absolute -top-3 -right-3 w-12 h-12 bg-secondary rounded-full flex items-center justify-center text-secondary-foreground font-bold shadow-lg">
+                      3º
+                    </div>
+                    <div className="text-5xl mb-4 text-center">🎁</div>
+                    <h3 className="font-bold text-xl mb-2 text-center text-foreground">Terceiro Prémio</h3>
+                    <p className="text-3xl font-extrabold text-center text-secondary">75.000 Kz</p>
+                    <p className="text-sm text-center text-muted-foreground mt-2">em vouchers</p>
+                  </div>
                 </div>
               </div>
 
-              <div className="space-y-4 text-muted-foreground">
-                <p className="text-lg">
-                  ✨ Participe agora e habilite-se a ganhar!
-                </p>
-                <p className="text-sm">
-                  Promoção válida até 31 de Dezembro de 2025
-                </p>
+              {/* Separador */}
+              <div className="relative">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-border"></div>
+                </div>
+                <div className="relative flex justify-center text-sm">
+                  <span className="px-4 bg-card text-muted-foreground">Como participar?</span>
+                </div>
               </div>
 
-              <Button 
-                size="lg" 
-                className="w-full md:w-auto px-12 py-6 text-xl font-bold shadow-festive hover:shadow-gold transition-all duration-300 hover:scale-105 bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90"
-                onClick={handleParticipate}
-                disabled={isLoading}
-              >
-                {isLoading ? (
-                  "A processar..."
-                ) : (
-                  <>
-                    <Gift className="mr-2 h-6 w-6" />
-                    Participar no Sorteio
-                  </>
-                )}
-              </Button>
+              {/* CTA Section */}
+              <div className="space-y-6 text-center">
+                <div className="space-y-3">
+                  <p className="text-lg text-foreground font-medium">
+                    É simples e rápido! Clique no botão abaixo para registar a sua participação.
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    O sorteio será realizado no dia 31 de Dezembro de 2025
+                  </p>
+                </div>
 
-              <p className="text-xs text-muted-foreground mt-4">
-                Ao participar, concorda com os termos e condições
-              </p>
+                {/* Main CTA Button - DESTACADO */}
+                <div className="pt-4">
+                  <Button 
+                    size="lg" 
+                    className="w-full md:w-auto px-16 py-8 text-2xl font-bold shadow-2xl hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.3)] transition-all duration-500 hover:scale-110 bg-gradient-to-r from-primary via-accent to-primary bg-[length:200%_100%] hover:bg-right animate-pulse hover:animate-none"
+                    onClick={handleParticipate}
+                    disabled={isLoading}
+                  >
+                    {isLoading ? (
+                      <span className="flex items-center gap-3">
+                        <div className="w-6 h-6 border-4 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin"></div>
+                        A processar...
+                      </span>
+                    ) : (
+                      <span className="flex items-center gap-3">
+                        <Gift className="h-7 w-7" />
+                        Participar Agora
+                        <Sparkles className="h-7 w-7" />
+                      </span>
+                    )}
+                  </Button>
+                </div>
+
+                {/* Trust indicators */}
+                <div className="flex flex-wrap items-center justify-center gap-6 pt-6 text-sm text-muted-foreground">
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-secondary rounded-full"></div>
+                    <span>100% Gratuito</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-secondary rounded-full"></div>
+                    <span>Sem sorteios ocultos</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-secondary rounded-full"></div>
+                    <span>Resultados públicos</span>
+                  </div>
+                </div>
+
+                <p className="text-xs text-muted-foreground pt-4 border-t border-border/50 max-w-2xl mx-auto">
+                  Ao participar, concorda com os nossos termos e condições. Promoção válida apenas para residentes em Angola. Os vencedores serão contactados por email.
+                </p>
+              </div>
             </div>
           </Card>
 
-          {/* Rodapé com destaque */}
-          <div className="mt-12 space-y-4">
-            <div className="p-6 rounded-lg bg-muted/50 backdrop-blur-sm animate-in fade-in duration-700 delay-300">
-              <p className="text-sm text-muted-foreground text-center">
-                🎅 Não perca esta oportunidade única de celebrar as festas com prémios especiais! 🎅
-              </p>
+          {/* Footer */}
+          <div className="pt-8 animate-in fade-in duration-700 delay-300">
+            <div className="max-w-3xl mx-auto">
+              <div className="grid md:grid-cols-3 gap-6 text-center">
+                <div className="p-4 space-y-2">
+                  <TreePine className="w-8 h-8 mx-auto text-secondary" />
+                  <h4 className="font-semibold text-sm text-foreground">Prémios Garantidos</h4>
+                  <p className="text-xs text-muted-foreground">Sorteio 100% transparente e verificável</p>
+                </div>
+                <div className="p-4 space-y-2">
+                  <Star className="w-8 h-8 mx-auto text-accent" />
+                  <h4 className="font-semibold text-sm text-foreground">Participação Gratuita</h4>
+                  <p className="text-xs text-muted-foreground">Sem custos ou taxas escondidas</p>
+                </div>
+                <div className="p-4 space-y-2">
+                  <Sparkles className="w-8 h-8 mx-auto text-primary" />
+                  <h4 className="font-semibold text-sm text-foreground">Fácil e Rápido</h4>
+                  <p className="text-xs text-muted-foreground">Apenas um clique para participar</p>
+                </div>
+              </div>
             </div>
-            
           </div>
         </div>
       </div>
